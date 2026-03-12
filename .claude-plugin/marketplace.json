@@ -1,0 +1,17 @@
+{
+  "name": "atomic",
+  "owner": {
+    "name": "greyboxed dev"
+  },
+  "metadata": {
+    "description": "Atomic git workflows — commits, recovery, and project initialization",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "atomic",
+      "description": "Atomic commits, repo recovery, and project initialization following Conventional Commits v1.0.0",
+      "source": "./plugins/atomic"
+    }
+  ]
+}

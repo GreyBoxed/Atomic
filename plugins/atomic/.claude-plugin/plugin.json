@@ -1,0 +1,8 @@
+{
+  "name": "atomic",
+  "version": "1.0.0",
+  "description": "Group changes into logical atomic commits following Conventional Commits v1.0.0",
+  "author": {
+    "name": "greyboxed dev"
+  }
+}
