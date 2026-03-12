@@ -17,6 +17,7 @@ atomic analyzes your diff, groups changes by logical concern, stages them indepe
 Install the plugin:
 
 ```
+claude plugin marketplace add GreyBoxed/atomic
 claude plugin install atomic
 ```
 
