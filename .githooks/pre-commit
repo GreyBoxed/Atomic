@@ -39,7 +39,7 @@ for file in $staged_files; do
     fi
 
     # Check for private key headers
-    if git diff --cached -- "$file" | grep -q '-----BEGIN.*PRIVATE KEY-----'; then
+    if git diff --cached -- "$file" | grep -q -- '-----BEGIN.*PRIVATE KEY-----'; then
       echo "WARNING: Private key detected in $file"
       found=1
     fi
