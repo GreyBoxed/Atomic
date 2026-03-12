@@ -1,0 +1,30 @@
+#!/bin/sh
+# Validate commit message follows Conventional Commits v1.0.0
+
+msg_file="$1"
+msg=$(head -1 "$msg_file")
+
+# Allow merge commits
+case "$msg" in
+  Merge\ *) exit 0 ;;
+esac
+
+# Validate format: type[(scope)][!]: description
+if ! printf '%s\n' "$msg" | grep -qE '^(feat|fix|refactor|test|docs|chore|perf|ci|build|revert)(\([a-zA-Z0-9._-]+\))?!?: [a-z]'; then
+  echo ""
+  echo "ERROR: Commit message does not follow Conventional Commits v1.0.0"
+  echo ""
+  echo "  Expected format: <type>[(scope)][!]: <description>"
+  echo ""
+  echo "  Types: feat, fix, refactor, test, docs, chore, perf, ci, build, revert"
+  echo "  Description must start with a lowercase letter."
+  echo ""
+  echo "  Examples:"
+  echo "    feat(mcp): add changelog generation tool"
+  echo "    fix: prevent crash when not in git repo"
+  echo "    docs(plugin): update README installation steps"
+  echo ""
+  echo "  Your message: $msg"
+  echo ""
+  exit 1
+fi

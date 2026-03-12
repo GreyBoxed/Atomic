@@ -1,0 +1,53 @@
+#!/bin/sh
+# Scan staged files for potential secrets
+
+if [ "${SKIP_SECRET_SCAN:-0}" = "1" ]; then
+  exit 0
+fi
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACM)
+
+if [ -z "$staged_files" ]; then
+  exit 0
+fi
+
+found=0
+
+# Check for secret file patterns
+for file in $staged_files; do
+  case "$file" in
+    .env|.env.*|credentials.json|*.pem|id_rsa|id_ed25519)
+      echo "WARNING: Potentially sensitive file staged: $file"
+      found=1
+      ;;
+  esac
+done
+
+# Check file contents for secret patterns
+for file in $staged_files; do
+  # Skip binary files and the hook itself
+  case "$file" in
+    *.png|*.jpg|*.gif|*.ico|*.woff|*.woff2|*.ttf|*.eot) continue ;;
+  esac
+
+  if [ -f "$file" ]; then
+    matches=$(git diff --cached -- "$file" | grep -nE '(API_KEY|SECRET|PASSWORD|TOKEN|PRIVATE_KEY)\s*=' | head -5)
+    if [ -n "$matches" ]; then
+      echo "WARNING: Possible secret in $file:"
+      echo "$matches" | sed 's/^/  /'
+      found=1
+    fi
+
+    # Check for private key headers
+    if git diff --cached -- "$file" | grep -q '-----BEGIN.*PRIVATE KEY-----'; then
+      echo "WARNING: Private key detected in $file"
+      found=1
+    fi
+  fi
+done
+
+if [ "$found" = "1" ]; then
+  echo ""
+  echo "Secrets detected in staged files. To override: SKIP_SECRET_SCAN=1 git commit"
+  exit 1
+fi
