@@ -1,8 +1,8 @@
-# atomic
+# Atomic
 
 A Claude Code plugin that turns messy working trees into clean, atomic git commits.
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
 
 <!-- TODO: Add terminal recording (GIF or asciinema) showing /atomic:commit in action -->
 
@@ -227,4 +227,4 @@ plugins/atomic/
 
 ## License
 
-MIT
+GPL-3.0. See [LICENSE](LICENSE) for details.
