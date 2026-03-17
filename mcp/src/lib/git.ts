@@ -32,7 +32,7 @@ export function git(args: string[], cwd: string): Promise<GitResult> {
  */
 export function parseStatusFiles(statusOutput: string): Set<string> {
   const files = new Set<string>();
-  const lines = statusOutput.trim().split("\n").filter(Boolean);
+  const lines = statusOutput.split("\n").filter((l) => l.trim());
   for (const line of lines) {
     const filePart = line.slice(3).trim();
     if (filePart.includes(" -> ")) {
