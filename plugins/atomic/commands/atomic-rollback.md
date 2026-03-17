@@ -7,12 +7,12 @@ allowed-tools: Bash(git log:*), Bash(git status:*), Bash(git diff:*), Bash(git r
 
 ## Context
 
-- Current branch: !`git branch --show-current 2>/dev/null || echo "(detached HEAD)"`
-- Working tree status: !`git status --short 2>/dev/null | head -20`
-- Recent commits: !`git log --oneline -10 2>/dev/null || echo "(no commits)"`
-- Uncommitted changes: !`git diff --stat 2>/dev/null | tail -1`
-- Staged changes: !`git diff --cached --stat 2>/dev/null | tail -1`
-- Submodule status: !`git submodule status --recursive 2>/dev/null || echo "(no submodules)"`
+- Current branch: !`git branch --show-current`
+- Working tree status: !`git status --short`
+- Recent commits: !`git log --oneline -10`
+- Uncommitted changes: !`git diff --stat`
+- Staged changes: !`git diff --cached --stat`
+- Submodule status: !`git submodule status --recursive`
 
 ## Your task
 

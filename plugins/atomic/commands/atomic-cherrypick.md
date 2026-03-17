@@ -7,11 +7,11 @@ allowed-tools: Bash(git log:*), Bash(git status:*), Bash(git diff:*), Bash(git c
 
 ## Context
 
-- Current branch: !`git branch --show-current 2>/dev/null || echo "(detached HEAD)"`
-- Working tree clean: !`git status --short 2>/dev/null | head -5`
-- All branches: !`git branch --all --format='%(refname:short)' 2>/dev/null | head -15`
-- Recent commits on current branch: !`git log --oneline -5 2>/dev/null`
-- Submodule status: !`git submodule status --recursive 2>/dev/null || echo "(no submodules)"`
+- Current branch: !`git branch --show-current`
+- Working tree clean: !`git status --short`
+- All branches: !`git branch --all --format='%(refname:short)'`
+- Recent commits on current branch: !`git log --oneline -5`
+- Submodule status: !`git submodule status --recursive`
 
 ## Your task
 

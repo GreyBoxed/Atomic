@@ -7,11 +7,11 @@ allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git c
 
 ## Context
 
-- Working directory status: !`git status --short 2>/dev/null || echo "(not a git repo)"`
-- All changed files with full diff: !`git diff 2>/dev/null || echo "(no changes)"`
-- Currently staged changes: !`git diff --cached --name-only 2>/dev/null || echo "(no staged changes)"`
-- Recent commits (for style reference): !`git log --oneline -5 2>/dev/null || echo "(no commits yet)"`
-- Submodule status: !`git submodule status --recursive 2>/dev/null || echo "(no submodules)"`
+- Working directory status: !`git status --short`
+- All changed files with full diff: !`git diff`
+- Currently staged changes: !`git diff --cached --name-only`
+- Recent commits (for style reference): !`git log --oneline -5`
+- Submodule status: !`git submodule status --recursive`
 
 ## Your task
 

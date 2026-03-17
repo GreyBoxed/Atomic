@@ -8,15 +8,15 @@ allowed-tools: Bash(git init:*), Bash(git config:*), Bash(git log:*), Bash(git s
 ## Context
 
 - Current directory: !`pwd`
-- Is git repo: !`git rev-parse --is-inside-work-tree 2>/dev/null || echo "false"`
-- Existing .gitignore: !`test -f .gitignore && echo "exists" || echo "missing"`
-- Existing CLAUDE.md: !`test -f CLAUDE.md && echo "exists" || echo "missing"`
-- Existing .editorconfig: !`test -f .editorconfig && echo "exists" || echo "missing"`
-- Existing .gitattributes: !`test -f .gitattributes && echo "exists" || echo "missing"`
-- Existing hooks directory: !`ls .githooks/ 2>/dev/null || ls .git/hooks/ 2>/dev/null | grep -v '.sample' | head -5 || echo "none"`
-- Project type detection: !`ls *.gemspec Gemfile Cargo.toml package.json pyproject.toml go.mod pom.xml build.gradle mix.exs 2>/dev/null || echo "(no framework files detected)"`
-- Existing commits: !`git log --oneline -3 2>/dev/null || echo "(no commits)"`
-- Git version: !`git version 2>/dev/null || echo "(unknown)"`
+- Is git repo: !`git rev-parse --is-inside-work-tree`
+- Existing .gitignore: !`test -f .gitignore`
+- Existing CLAUDE.md: !`test -f CLAUDE.md`
+- Existing .editorconfig: !`test -f .editorconfig`
+- Existing .gitattributes: !`test -f .gitattributes`
+- Existing hooks directory: !`ls .githooks/`
+- Project type detection: !`ls *.gemspec Gemfile Cargo.toml package.json pyproject.toml go.mod pom.xml build.gradle mix.exs`
+- Existing commits: !`git log --oneline -3`
+- Git version: !`git version`
 
 ## Your task
 

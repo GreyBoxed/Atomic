@@ -7,8 +7,8 @@ allowed-tools: mcp__atomic-commit__review_commits, mcp__atomic-commit__undo_comm
 
 ## Context
 
-- Recent commits: !`git log --oneline -10 2>/dev/null || echo "(no commits yet)"`
-- Current branch: !`git branch --show-current 2>/dev/null || echo "(detached HEAD)"`
+- Recent commits: !`git log --oneline -10`
+- Current branch: !`git branch --show-current`
 
 ## Your task
 

@@ -7,13 +7,13 @@ allowed-tools: Bash(git fsck:*), Bash(git status:*), Bash(git submodule:*), Bash
 
 ## Context
 
-- Repository root: !`git rev-parse --show-toplevel 2>/dev/null || echo "(not a git repo)"`
-- Working tree status: !`git status --short 2>/dev/null | head -20`
-- Current branch: !`git branch --show-current 2>/dev/null || echo "(detached HEAD)"`
-- Submodule status: !`git submodule status --recursive 2>/dev/null || echo "(no submodules)"`
-- Repository integrity (quick): !`git fsck --no-full --connectivity-only 2>&1 | tail -10`
-- Stale worktrees: !`git worktree list 2>/dev/null`
-- Remote tracking: !`git remote -v 2>/dev/null || echo "(no remotes)"`
+- Repository root: !`git rev-parse --show-toplevel`
+- Working tree status: !`git status --short`
+- Current branch: !`git branch --show-current`
+- Submodule status: !`git submodule status --recursive`
+- Repository integrity (quick): !`git fsck --no-full --connectivity-only`
+- Stale worktrees: !`git worktree list`
+- Remote tracking: !`git remote -v`
 
 ## Your task
 
