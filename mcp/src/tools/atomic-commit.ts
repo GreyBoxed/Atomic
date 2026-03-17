@@ -28,7 +28,7 @@ const GroupSchema = z.object({
   message: z.string().min(1).max(2000).describe("Conventional commit message"),
 });
 
-function extractSha(commitOutput: string): string {
+export function extractSha(commitOutput: string): string {
   const match = commitOutput.match(/\[.+\s+([0-9a-f]+)\]/);
   return match ? match[1] : "unknown";
 }

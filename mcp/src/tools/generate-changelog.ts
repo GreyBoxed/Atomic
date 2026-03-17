@@ -2,7 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { git } from "../lib/git.js";
 
-interface ParsedCommit {
+export interface ParsedCommit {
   hash: string;
   type: string;
   scope: string | null;
@@ -25,7 +25,7 @@ const TYPE_LABELS: Record<string, string> = {
   revert: "Reverts",
 };
 
-function parseCommitLine(line: string): ParsedCommit {
+export function parseCommitLine(line: string): ParsedCommit {
   const [hash, ...rest] = line.split("|");
   const subject = rest.join("|");
   const match = CONVENTIONAL_RE.exec(subject);
@@ -40,7 +40,7 @@ function parseCommitLine(line: string): ParsedCommit {
   return { hash: hash!, type: "other", scope: null, subject };
 }
 
-function groupByType(commits: ParsedCommit[]): Map<string, ParsedCommit[]> {
+export function groupByType(commits: ParsedCommit[]): Map<string, ParsedCommit[]> {
   const groups = new Map<string, ParsedCommit[]>();
   for (const c of commits) {
     const existing = groups.get(c.type);
@@ -53,7 +53,7 @@ function groupByType(commits: ParsedCommit[]): Map<string, ParsedCommit[]> {
   return groups;
 }
 
-function toMarkdown(groups: Map<string, ParsedCommit[]>): string {
+export function toMarkdown(groups: Map<string, ParsedCommit[]>): string {
   const sections: string[] = ["# Changelog", ""];
   for (const [type, commits] of groups) {
     const label = TYPE_LABELS[type] ?? type;
@@ -67,7 +67,7 @@ function toMarkdown(groups: Map<string, ParsedCommit[]>): string {
   return sections.join("\n");
 }
 
-function toJson(
+export function toJson(
   groups: Map<string, ParsedCommit[]>
 ): string {
   const obj: Record<

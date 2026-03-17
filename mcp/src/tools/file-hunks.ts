@@ -1,35 +1,7 @@
 import { z } from "zod";
-import { realpath } from "node:fs/promises";
-import { resolve } from "node:path";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
-import { git } from "../lib/git.js";
+import { git, validatePath } from "../lib/git.js";
 import { parseDiff } from "../lib/hunk-parser.js";
-
-async function validatePath(filePath: string, cwd: string): Promise<void> {
-  if (
-    filePath.includes("..") ||
-    filePath.startsWith("/") ||
-    filePath.includes("\x00") ||
-    filePath.startsWith("-")
-  ) {
-    throw new Error(`Invalid file path (path traversal rejected): ${filePath}`);
-  }
-  try {
-    const absolute = resolve(cwd, filePath);
-    const real = await realpath(absolute);
-    const toplevel = (
-      await git(["rev-parse", "--show-toplevel"], cwd)
-    ).stdout.trim();
-    if (!real.startsWith(toplevel + "/") && real !== toplevel) {
-      throw new Error(`Path escapes repository: ${filePath}`);
-    }
-  } catch (err) {
-    if (err instanceof Error && "code" in err && (err as NodeJS.ErrnoException).code === "ENOENT") {
-      return;
-    }
-    throw err;
-  }
-}
 
 export function registerFileHunks(server: McpServer): void {
   server.tool(

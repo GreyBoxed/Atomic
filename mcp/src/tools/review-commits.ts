@@ -19,7 +19,7 @@ interface CommitData {
  * Parse `git log --numstat` output to extract per-commit file stats.
  * Format: "insertions\tdeletions\tfilename" lines after each commit header.
  */
-function parseNumstat(
+export function parseNumstat(
   numstatOutput: string,
   shas: string[]
 ): Map<string, { files: string[]; ins: number; del: number }> {
@@ -63,7 +63,7 @@ function parseNumstat(
  * Parse combined `git log -p` output into per-commit diffs.
  * Splits on "commit <sha>" lines that git produces.
  */
-function parseDiffs(
+export function parseDiffs(
   diffOutput: string,
   shas: string[]
 ): Map<string, string> {
