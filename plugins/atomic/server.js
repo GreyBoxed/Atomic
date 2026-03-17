@@ -2980,7 +2980,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve4.call(this, root, ref);
+      let _sch = resolve3.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3007,7 +3007,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve4(root, ref) {
+    function resolve3(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3582,7 +3582,7 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve4(baseURI, relativeURI, options) {
+    function resolve3(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse3(baseURI, schemelessOptions), parse3(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
@@ -3809,7 +3809,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve4,
+      resolve: resolve3,
       resolveComponent,
       equal,
       serialize,
@@ -18870,7 +18870,7 @@ var Protocol = class {
           return;
         }
         const pollInterval = task2.pollInterval ?? this._options?.defaultTaskPollInterval ?? 1e3;
-        await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
+        await new Promise((resolve3) => setTimeout(resolve3, pollInterval));
         options?.signal?.throwIfAborted();
       }
     } catch (error2) {
@@ -18887,7 +18887,7 @@ var Protocol = class {
    */
   request(request, resultSchema, options) {
     const { relatedRequestId, resumptionToken, onresumptiontoken, task, relatedTask } = options ?? {};
-    return new Promise((resolve4, reject) => {
+    return new Promise((resolve3, reject) => {
       const earlyReject = (error2) => {
         reject(error2);
       };
@@ -18965,7 +18965,7 @@ var Protocol = class {
           if (!parseResult.success) {
             reject(parseResult.error);
           } else {
-            resolve4(parseResult.data);
+            resolve3(parseResult.data);
           }
         } catch (error2) {
           reject(error2);
@@ -19226,12 +19226,12 @@ var Protocol = class {
       }
     } catch {
     }
-    return new Promise((resolve4, reject) => {
+    return new Promise((resolve3, reject) => {
       if (signal.aborted) {
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
         return;
       }
-      const timeoutId = setTimeout(resolve4, interval);
+      const timeoutId = setTimeout(resolve3, interval);
       signal.addEventListener("abort", () => {
         clearTimeout(timeoutId);
         reject(new McpError(ErrorCode.InvalidRequest, "Request cancelled"));
@@ -20331,7 +20331,7 @@ var McpServer = class {
     let task = createTaskResult.task;
     const pollInterval = task.pollInterval ?? 5e3;
     while (task.status !== "completed" && task.status !== "failed" && task.status !== "cancelled") {
-      await new Promise((resolve4) => setTimeout(resolve4, pollInterval));
+      await new Promise((resolve3) => setTimeout(resolve3, pollInterval));
       const updatedTask = await extra.taskStore.getTask(taskId);
       if (!updatedTask) {
         throw new McpError(ErrorCode.InternalError, `Task ${taskId} not found during polling`);
@@ -20974,12 +20974,12 @@ var StdioServerTransport = class {
     this.onclose?.();
   }
   send(message) {
-    return new Promise((resolve4) => {
+    return new Promise((resolve3) => {
       const json = serializeMessage(message);
       if (this._stdout.write(json)) {
-        resolve4();
+        resolve3();
       } else {
-        this._stdout.once("drain", resolve4);
+        this._stdout.once("drain", resolve3);
       }
     });
   }
@@ -20990,7 +20990,7 @@ import { execFile } from "node:child_process";
 import { realpath } from "node:fs/promises";
 import { resolve } from "node:path";
 function git(args, cwd) {
-  return new Promise((resolve4, reject) => {
+  return new Promise((resolve3, reject) => {
     execFile(
       "git",
       args,
@@ -21002,14 +21002,14 @@ function git(args, cwd) {
           );
           return;
         }
-        resolve4({ stdout, stderr });
+        resolve3({ stdout, stderr });
       }
     );
   });
 }
 function parseStatusFiles(statusOutput) {
   const files = /* @__PURE__ */ new Set();
-  const lines = statusOutput.trim().split("\n").filter(Boolean);
+  const lines = statusOutput.split("\n").filter((l) => l.trim());
   for (const line of lines) {
     const filePart = line.slice(3).trim();
     if (filePart.includes(" -> ")) {
@@ -21665,26 +21665,6 @@ function registerUndoCommits(server2) {
 }
 
 // src/tools/file-hunks.ts
-import { realpath as realpath2 } from "node:fs/promises";
-import { resolve as resolve3 } from "node:path";
-async function validatePath2(filePath, cwd) {
-  if (filePath.includes("..") || filePath.startsWith("/") || filePath.includes("\0") || filePath.startsWith("-")) {
-    throw new Error(`Invalid file path (path traversal rejected): ${filePath}`);
-  }
-  try {
-    const absolute = resolve3(cwd, filePath);
-    const real = await realpath2(absolute);
-    const toplevel = (await git(["rev-parse", "--show-toplevel"], cwd)).stdout.trim();
-    if (!real.startsWith(toplevel + "/") && real !== toplevel) {
-      throw new Error(`Path escapes repository: ${filePath}`);
-    }
-  } catch (err) {
-    if (err instanceof Error && "code" in err && err.code === "ENOENT") {
-      return;
-    }
-    throw err;
-  }
-}
 function registerFileHunks(server2) {
   server2.tool(
     "file_hunks",
@@ -21741,7 +21721,7 @@ function registerFileHunks(server2) {
             ]
           };
         }
-        await validatePath2(file, cwd);
+        await validatePath(file, cwd);
         const diffResult = await git(["diff", "--", file], cwd);
         if (!diffResult.stdout.trim()) {
           return {
