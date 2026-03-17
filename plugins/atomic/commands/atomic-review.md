@@ -2,7 +2,7 @@
 name: atomic:review
 description: Review recent atomic commits for quality, correctness, and convention adherence
 argument-hint: "[optional: range like main..HEAD or HEAD~5]"
-allowed-tools: mcp__atomic-commit__review_commits, mcp__atomic-commit__undo_commits
+allowed-tools: Bash(git log:*), Bash(git branch:*), mcp__atomic-commit__review_commits, mcp__atomic-commit__undo_commits
 ---
 
 ## Context

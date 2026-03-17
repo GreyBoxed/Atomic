@@ -2,7 +2,7 @@
 name: atomic:commit
 description: Group changes by feature and create atomic commits following Conventional Commits v1.0.0
 argument-hint: "[optional: specific instructions]"
-allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git commit:*), Bash(git reset:*), Bash(git log:*), mcp__atomic-commit__git_state, mcp__atomic-commit__atomic_commit, mcp__atomic-commit__dry_run, mcp__atomic-commit__file_hunks, mcp__atomic-commit__undo_commits, mcp__atomic-commit__generate_changelog, mcp__atomic-commit__scan_secrets
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git commit:*), Bash(git reset:*), Bash(git log:*), Bash(git submodule:*), mcp__atomic-commit__git_state, mcp__atomic-commit__atomic_commit, mcp__atomic-commit__dry_run, mcp__atomic-commit__file_hunks, mcp__atomic-commit__undo_commits, mcp__atomic-commit__generate_changelog, mcp__atomic-commit__scan_secrets
 ---
 
 ## Context

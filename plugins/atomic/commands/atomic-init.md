@@ -2,7 +2,7 @@
 name: atomic:init
 description: Initialize a project with git conventions — hooks, gitignore, commit standards, and CLAUDE.md
 argument-hint: "[optional: preset 'minimal', 'standard', or 'strict']"
-allowed-tools: Bash(git init:*), Bash(git config:*), Bash(git log:*), Bash(git status:*), Bash(git rev-parse:*), Bash(git add:*), Bash(git commit:*), Bash(git version:*), Bash(ls:*), Bash(cat:*), Bash(mkdir:*), Bash(chmod:*), Bash(test:*), Bash(echo:*), Read, Write, Glob, Grep
+allowed-tools: Bash(pwd:*), Bash(git init:*), Bash(git config:*), Bash(git log:*), Bash(git status:*), Bash(git rev-parse:*), Bash(git add:*), Bash(git commit:*), Bash(git version:*), Bash(ls:*), Bash(cat:*), Bash(mkdir:*), Bash(chmod:*), Bash(test:*), Bash(echo:*), Read, Write, Glob, Grep
 ---
 
 ## Context
