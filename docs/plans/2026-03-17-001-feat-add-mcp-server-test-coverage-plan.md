@@ -65,14 +65,14 @@ Tests that run `git commit` need `user.name` and `user.email`. Set these per-rep
 
 ## Acceptance Criteria
 
-- [ ] vitest installed as devDependency with `"test"` and `"test:watch"` scripts in `mcp/package.json`
-- [ ] Tier 1 unit tests for all lib/ pure functions (target: 90%+ coverage on lib/)
-- [ ] Tier 2 unit tests for secret-scanner and validatePath
+- [x] vitest installed as devDependency with `"test"` and `"test:watch"` scripts in `mcp/package.json`
+- [x] Tier 1 unit tests for all lib/ pure functions (target: 90%+ coverage on lib/)
+- [x] Tier 2 unit tests for secret-scanner and validatePath
 - [ ] Tier 3 integration tests for atomic-commit, undo-commits, and dry-run tool handlers
-- [ ] Duplicated `validatePath` in file-hunks.ts consolidated to import from lib
-- [ ] Private pure functions in tool files exported and unit-tested
-- [ ] `__tests__` excluded from production build
-- [ ] All tests pass in CI-like environment (no reliance on global git config)
+- [x] Duplicated `validatePath` in file-hunks.ts consolidated to import from lib
+- [x] Private pure functions in tool files exported and unit-tested
+- [x] `__tests__` excluded from production build
+- [x] All tests pass in CI-like environment (no reliance on global git config)
 
 ## Implementation Plan
 
