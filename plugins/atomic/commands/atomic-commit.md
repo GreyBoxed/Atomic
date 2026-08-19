@@ -58,6 +58,17 @@ Then, for each group in order:
 [optional footer(s)]
 ```
 
+**Length rules**
+
+- `<description>` — imperative mood, no trailing period, under 72 characters.
+- `[optional body]` — **300 characters maximum**, roughly 3-4 short lines. Include one
+  only when the "why" isn't obvious from the description. If the explanation needs more
+  than 300 characters, the commit isn't atomic: split it into smaller commits, each with
+  its own short body.
+- `[optional footer(s)]` — a separate slot after the body, always written in full:
+  `BREAKING CHANGE:`, `This reverts commit <sha>`, ticket refs. The 300-character body
+  limit does not reach them.
+
 **Types table**
 
 | Type | Description | SemVer impact |
